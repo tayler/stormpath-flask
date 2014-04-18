@@ -271,7 +271,7 @@ new account, and send them to a dashboard page (which we have yet to code!)::
                 password = request.form.get('password'),
                 first_name = request.form.get('first-name'),
                 last_name = request.form.get('last-name'),
-            })
+            )
         except StormpathError, err:
             return render_template('register.html', error=err.message)
 
@@ -383,7 +383,7 @@ seamlessly::
     # ...
 
     # Map our custom login view to Flask-Stormpath.
-    stormpath_manager.login_view = login
+    stormpath_manager.login_view = 'login'
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
@@ -395,6 +395,7 @@ seamlessly::
             _user = User.from_login(
                 request.form.get('email'),
                 request.form.get('password')
+            )
         except StormpathError, err:
             return render_template('login.html', error=err.message)
 
